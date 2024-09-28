@@ -4,7 +4,7 @@ All the books at my house.
 
 ## Development
 
-This is a [Django][https://www.djangoproject.com/] project set up with
+This is a [Django](https://www.djangoproject.com/) project set up with
 [uv](https://github.com/astral-sh/uv).
 
 Run development server:
