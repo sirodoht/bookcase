@@ -21,10 +21,8 @@ jobs:
         chmod 600 ~/.ssh/brick.key
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
-    - name: Install uv
-      run: curl -LsSf https://astral.sh/uv/install.sh | sh
     - name: Run ansible
-      run: cd ansible/ && ~/.cargo/bin/uv run ansible-playbook deploy.yml
+      run: cd ansible/ && uvx run ansible-playbook deploy.yml
       env:
         ANSIBLE_HOST_KEY_CHECKING: False
         ANSIBLE_PRIVATE_KEY_FILE: "~/.ssh/brick.key"
