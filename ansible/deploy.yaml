@@ -1,0 +1,39 @@
+---
+- hosts: virtualmachines
+  vars_files:
+    - vars.yaml
+  become: yes
+  tasks:
+    - name: ping
+      ansible.builtin.ping:
+
+    - name: clone
+      ansible.builtin.git:
+        repo: git@github.com:sirodoht/bookcase.git
+        dest: /var/www/bookcase
+        version: main
+        accept_hostkey: true
+      become_user: deploy
+
+    - name: collectstatic
+      ansible.builtin.shell:
+        cmd: ~/.cargo/bin/uv run manage.py collectstatic --no-input
+        chdir: /var/www/bookcase
+      args:
+        executable: /bin/bash
+      become_user: deploy
+    - name: migrations
+      ansible.builtin.shell:
+        cmd: ~/.cargo/bin/uv run manage.py migrate --no-input
+        chdir: /var/www/bookcase
+      args:
+        executable: /bin/bash
+      become_user: deploy
+    - name: gunicorn restart
+      ansible.builtin.systemd:
+        name: bookcase
+        state: restarted
+    - name: caddy restart
+      ansible.builtin.systemd:
+        name: caddy
+        state: restarted
