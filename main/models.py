@@ -14,7 +14,7 @@ class User(AbstractUser):
 
 
 class Author(models.Model):
-    full_name = models.CharField(_("book title"), max_length=200)
+    full_name = models.CharField(_("author full name"), max_length=200)
 
     def __str__(self):
         return self.full_name
