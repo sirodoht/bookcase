@@ -35,8 +35,8 @@
         name: caddy
     - name: caddyfile
       ansible.builtin.template:
-        src: Caddyfile.j2
-        dest: /etc/caddy/Caddyfile
+        src: bookcase.caddy.j2
+        dest: /etc/caddy/bookcase.caddy
         owner: root
         group: root
         mode: '0644'
