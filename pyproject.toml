@@ -6,10 +6,12 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "django>=5.1.1",
+    "gunicorn>=23.0.0",
 ]
 
 [tool.uv]
 dev-dependencies = [
+    "ansible>=10.4.0",
     "djade>=1.1.0",
     "ruff>=0.6.8",
 ]

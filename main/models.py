@@ -1,8 +1,19 @@
 from datetime import datetime
 
+from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+
+class User(AbstractUser):
+    first_name = None
+    last_name = None
+    username = models.CharField(_("username"), max_length=100, unique=True)
+    email = models.EmailField(
+        _("email"),
+        unique=True,
+    )
 
 
 class Book(models.Model):

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-)=*k&d)&-f6k3cb1!t46^-!3!*aiu-ulg*rn!la^167s*89pn$"
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-)=*k&d)&-f6k3cb1!t46^-!3!*aiu-ul")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG") == "1"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    f".{os.getenv('DOMAIN', 'books.sirodoht.com')}",
+]
 
 
 # Application definition
@@ -70,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "bookcase.wsgi.application"
 
+AUTH_USER_MODEL = "main.User"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -117,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
