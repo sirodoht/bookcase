@@ -81,10 +81,6 @@
         version: main
         accept_hostkey: true
       become_user: deploy
-    #- name: dependencies
-    #  ansible.builtin.shell:
-    #    cmd: uv pip install -r requirements.txt
-    #  become_user: deploy
 
     # systemd
     - name: systemd main service
@@ -109,14 +105,14 @@
     # deployment specific
     - name: collectstatic
       ansible.builtin.shell:
-        cmd: .cargo/bin/uv run manage.py collectstatic --no-input
+        cmd: ~/.cargo/bin/uv run manage.py collectstatic --no-input
         chdir: /var/www/bookcase
       args:
         executable: /bin/bash
       become_user: deploy
     - name: migrations
       ansible.builtin.shell:
-        cmd: uv run manage.py migrate --no-input
+        cmd: ~/.cargo/bin/uv run manage.py migrate --no-input
         chdir: /var/www/bookcase
       args:
         executable: /bin/bash
