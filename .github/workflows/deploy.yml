@@ -24,7 +24,7 @@ jobs:
     - name: Install uv
       run: curl -LsSf https://astral.sh/uv/install.sh | sh
     - name: Run ansible
-      run: cd ansible/ && uvx ansible ansible-playbook deploy.yml
+      run: cd ansible/ && uvx --from ansible-core ansible-playbook -v deploy.yaml
       env:
         ANSIBLE_HOST_KEY_CHECKING: False
         ANSIBLE_PRIVATE_KEY_FILE: "~/.ssh/brick.key"
