@@ -14,3 +14,6 @@ export DOMAIN=
 # 1: show
 # 0: don't show
 export DEBUG=0
+
+# Session cookies secret
+export SECRET_KEY=some-secret-key
