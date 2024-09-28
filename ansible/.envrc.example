@@ -1,0 +1,16 @@
+# inventory.yaml
+
+# Server IP and user with ssh access
+export ANSIBLE_HOST=
+export ANSIBLE_USER=root
+
+
+# vars.yaml
+
+# Domain name and email for Caddy
+export DOMAIN=
+
+# Show exceptions and tracebacks on errors
+# 1: show
+# 0: don't show
+export DEBUG=0

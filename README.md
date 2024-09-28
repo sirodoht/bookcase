@@ -10,7 +10,16 @@ This is a [Django](https://www.djangoproject.com/) project set up with
 Run development server:
 
 ```sh
+cp .envrc.example .envrc
 uv run manage.py runserver
+```
+
+## Deployment
+
+```sh
+cd ansible/
+cp .envrc.example .envrc
+uv run ansible-playbook -v playbook.yaml
 ```
 
 ## Tools
