@@ -10,14 +10,19 @@ class User(AbstractUser):
     first_name = None
     last_name = None
     username = models.CharField(_("username"), max_length=100, unique=True)
-    email = models.EmailField(
-        _("email"),
-        unique=True,
-    )
+    email = models.EmailField(_("email"), unique=True)
+
+
+class Author(models.Model):
+    full_name = models.CharField(_("book title"), max_length=200)
+
+    def __str__(self):
+        return self.full_name
 
 
 class Book(models.Model):
     title = models.CharField(_("book title"), max_length=200, unique=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     published_at = models.PositiveIntegerField(
         _("year of publication"),
         default=datetime.now().year,
@@ -29,10 +34,3 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class Author(models.Model):
-    full_name = models.CharField(_("book title"), max_length=200)
-
-    def __str__(self):
-        return self.full_name
