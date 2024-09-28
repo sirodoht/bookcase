@@ -1,5 +1,22 @@
 {% extends "main/layout.html" %}
 
 {% block content %}
-welcome to words
+<h1>
+    welcome to words
+</h1>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publication Date</th>
+    </tr>
+    {% for book in book_list %}
+    <tr>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author.name }}</td>
+        <td>{{ book.published_date }}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock content %}
