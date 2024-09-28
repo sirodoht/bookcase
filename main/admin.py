@@ -49,6 +49,6 @@ class BookAdmin(admin.ModelAdmin):
 class AuthorAdmin(admin.ModelAdmin):
     list_display = (
         "id",
-        "full_name",
+        "name",
     )
     ordering = ["-id"]
