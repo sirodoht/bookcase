@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Load SSH key
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_KEY" > ~/.ssh/brick.key
+        chmod 600 ~/.ssh/brick.key
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+    - name: Run ansible
+      run: cd ansible/ && ~/.cargo/bin/uv run ansible-playbook deploy.yml
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: False
+        ANSIBLE_PRIVATE_KEY_FILE: "~/.ssh/brick.key"
+        ANSIBLE_HOST: ${{ vars.ANSIBLE_HOST }}
+        ANSIBLE_USER: ${{ vars.ANSIBLE_USER }}
+        DEBUG: ${{ vars.DEBUG }}
+        DOMAIN: ${{ vars.DOMAIN }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
