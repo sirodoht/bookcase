@@ -25,4 +25,4 @@ jobs:
     - name: Run Python linting
       run: uv run ruff check
     - name: Run HTML linting
-      run: uv run ruff check
+      run: uv run djade main/templates/**/*.html
