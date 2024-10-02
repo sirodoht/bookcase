@@ -41,6 +41,8 @@ class BookAdmin(admin.ModelAdmin):
         "id",
         "title",
         "published_at",
+        "is_hardcopy_owned",
+        "digital_file",
     )
     ordering = ["-id"]
 

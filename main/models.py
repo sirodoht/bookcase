@@ -23,6 +23,8 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(_("book title"), max_length=200, unique=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    is_hardcopy_owned = models.BooleanField(default=False)
+    digital_file = models.FileField(null=True)
     published_at = models.PositiveIntegerField(
         _("year of publication"),
         default=datetime.now().year,
