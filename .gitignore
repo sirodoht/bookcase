@@ -8,5 +8,8 @@
 # generated static
 /static/
 
+# uploaded files
+/files/
+
 # database
 db.sqlite3
