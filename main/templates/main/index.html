@@ -15,12 +15,26 @@
         <th>Title</th>
         <th>Author</th>
         <th>Publication Date</th>
+        <th>Hardcopy</th>
+        <th>Digital Copy</th>
+        <th></th>
     </tr>
     {% for book in book_list %}
     <tr>
         <td>{{ book.title }}</td>
         <td>{{ book.author.name }}</td>
         <td>{{ book.published_at }}</td>
+        <td>{{ book.is_hardcopy_owned|yesno }}</td>
+        <td>
+            {% if book.digital_file %}
+            <a href="{{ book.digital_file.url }}" target="_blank">{{ book.digital_file }}</a>
+            {% else %}
+            no
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'admin:main_book_change' book.id %}">edit</a>
+        </td>
     </tr>
     {% endfor %}
 </table>
